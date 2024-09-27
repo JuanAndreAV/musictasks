@@ -1,0 +1,83 @@
+<header class="bg-gradient-to-r from-sky-800 from-10% via-sky-700 via-30% to-sky-600 to-90% p-4  ">
+    <h1 class="text-center text-white text-5xl font-semibold md:text-9xl">Music tasks:</h1>
+</header>
+<body class=" bg-stone-200 grid justify-items-center">
+  <div class="grid grid-rows-2 justify-center">
+    <section class="flex justify-center  mt-5 h-20 grow-0">
+        <div class="grid grid-cols-3 gap-0.5 content-center">
+            <button type="button" (click)="setFilter('all')" class="bg-gradient-to-r from-blue-400 to-blue-900 hover:from-pink-500 hover:to-orange-500 w-32 h-10 rounded-l-lg text-white font-mono">
+                Hoy
+              </button>
+              <button type="button" (click)="setFilter('pending')" class="bg-gradient-to-r from-blue-900 to-blue-900 hover:from-pink-500 hover:to-orange-500 w-32 h-10 text-white font-mono">
+                Pendiente
+              </button>
+              <button type="button" (click)="setFilter('completed')"  class="bg-gradient-to-r from-blue-900 to-blue-400 hover:from-pink-500 hover:to-orange-500 w-32 h-10 rounded-r-lg text-white font-mono">
+                Realizado
+              </button>
+              
+        </div>
+      
+    </section>
+    <section class="grid justify-items-center bg-stone-200 mt-10 w-full  h-20 grow-0">
+        <div class="mb-4 w-4/5 ">
+          
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="tarea"><button routerLink='/nuevaTarea'>Nueva tarea</button></label>
+              Nueva tarea
+      
+            <input [formControl]="tareaForm" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="tarea" type="text" placeholder="Ingresa nueva tarea"(keydown.enter)="agregarTarea()">
+        
+          
+        
+        </div>
+    </section>
+  </div>
+  <div class=" w-full">
+    
+  <table class="min-w-full text-left">
+    <thead>
+      <tr class="bg-gray-200 text-gray-700">
+        <th class="px-4 py-2">Seleccionar</th>
+        <th class="px-4 py-2"> Tarea</th>
+        <th class="px-4 py-2">Estado</th>
+        <th class="px-4 py-2">Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (tarea of renderizado(); track tarea.id ) {
+      <tr [ngClass]="{'bg-gris text-white line-through': tarea.estado, 'bg-beige text-white': !tarea.estado}">
+        <td class="px-4 py-2">
+          <input type="checkbox" name="selectedTask"   class="mr-4 h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-600 rounded" 
+         [(ngModel)]="tarea.estado" 
+         (change)="onCheck(tarea)">
+        </td>
+        <!-- Nombre de la tarea -->
+        <td class="px-4 py-2">{{ tarea?.title }}</td>
+        <!-- Estado de la tarea -->
+         @if(tarea.estado) {
+          <td class="px-4 py-2">Realizado</td>
+         }@else{
+          <td class="px-4 py-2">Pendiente</td>
+         }
+         
+        
+         <td class="px-4 py-2">
+          <button (click)="borrarTarea(tarea.id)"><span class="material-symbols-outlined">
+            delete
+            </span></button>
+        </td>
+      </tr>
+     }
+    </tbody>
+  </table>
+</div>
+ 
+</body>
+<footer class="bg-black">
+  <div class="flex justify-center">
+    <ul>
+      <li><a href="#" class="text-white">facebook</a></li>
+      <li><a href="#" class="text-white">Instagram</a></li>
+      <li><a href="#" class="text-white">juanitoCode</a></li>
+    </ul>
+  </div>
+</footer>
