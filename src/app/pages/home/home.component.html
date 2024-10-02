@@ -1,11 +1,11 @@
 <header class="bg-gradient-to-r from-sky-800 from-10% via-sky-700 via-30% to-sky-600 to-90% p-4  ">
-    <h1 class="text-center text-white text-5xl font-semibold md:text-9xl">Music tasks:</h1>
+    <h1 class="text-center text-white text-5xl font-juanito md:text-9xl">Music tasks:</h1>
 </header>
-<body class=" bg-stone-200 grid justify-items-center">
+<body class=" bg-white grid justify-items-center">
   <div class="grid grid-rows-2 justify-center">
     <section class="flex justify-center  mt-5 h-20 grow-0">
         <div class="grid grid-cols-3 gap-0.5 content-center">
-            <button type="button" (click)="setFilter('all')" class="bg-gradient-to-r from-blue-400 to-blue-900 hover:from-pink-500 hover:to-orange-500 w-32 h-10 rounded-l-lg text-white font-mono">
+            <button type="button" (click)="setFilter('all')" class="bg-gradient-to-r from-blue-400 to-blue-900 hover:from-pink-500 hover:to-orange-500 w-32 h-10 rounded-l-lg  text-white font-mono">
                 Hoy
               </button>
               <button type="button" (click)="setFilter('pending')" class="bg-gradient-to-r from-blue-900 to-blue-900 hover:from-pink-500 hover:to-orange-500 w-32 h-10 text-white font-mono">
@@ -13,38 +13,81 @@
               </button>
               <button type="button" (click)="setFilter('completed')"  class="bg-gradient-to-r from-blue-900 to-blue-400 hover:from-pink-500 hover:to-orange-500 w-32 h-10 rounded-r-lg text-white font-mono">
                 Realizado
-              </button>
-              
+              </button>  
         </div>
-      
     </section>
-    <section class="grid justify-items-center bg-stone-200 mt-10 w-full  h-20 grow-0">
-        <div class="mb-4 w-4/5 ">
-          
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="tarea"><button routerLink='/nuevaTarea'>Nueva tarea</button></label>
-              Nueva tarea
-      
-            <input [formControl]="tareaForm" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="tarea" type="text" placeholder="Ingresa nueva tarea"(keydown.enter)="agregarTarea()">
-        
-          
-        
+    <section class="grid place-items-end   mt-2 mb-10 w-full  h-20 grow-0">
+        <div class="grid justify-items-end   mb-4 w-4/5 ">
+          <div class="p-8">
+            <button class=" flex items-center bg-green-800 text-white p-2   rounded" (click)="openForm(true)"> <span class="material-symbols-outlined">music_note</span> 
+             Agregar tarea</button>
+          </div>
+        <!--<label class="block text-gray-700 text-sm font-bold mb-2" for="tarea"><button routerLink='/nuevaTarea'>Nueva tarea</button></label>-->
+            
+           
+           <!-- <input [formControl]="tareaForm" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="tarea" type="text" placeholder="Ingresa nueva tarea"(keydown.enter)="agregarTarea()">-->
+            @if(isFormVisible){
+              <app-form  (formClosed)="closeForm(true)"></app-form>
+            }
+           
         </div>
+        
     </section>
   </div>
   <div class=" w-full">
     
-  <table class="min-w-full text-left">
+    
+    <table class="min-w-full text-left">
     <thead>
-      <tr class="bg-gray-200 text-gray-700">
+      <tr class=" text-gray-700">
         <th class="px-4 py-2">Seleccionar</th>
         <th class="px-4 py-2"> Tarea</th>
         <th class="px-4 py-2">Estado</th>
+        <th class="px-4 py-2">Notas</th>
         <th class="px-4 py-2">Acción</th>
       </tr>
     </thead>
     <tbody>
+
       @for (tarea of renderizado(); track tarea.id ) {
-      <tr [ngClass]="{'bg-gris text-white line-through': tarea.estado, 'bg-beige text-white': !tarea.estado}">
+        @if (isNotesVisible) {
+          <section class="fixed top-0 left-0 w-full h-full z-40 flex justify-center items-center pointer-events-none">
+            <div class="overflow-y-auto overflow-x-hidden h-full w-full max-w-md p-4">
+              <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 max-h-screen overflow-hidden">
+                <!-- Botón de cierre -->
+                <button 
+                  type="button" 
+                  (click)="closeForm(false)" 
+                  class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
+                  <span class="material-symbols-outlined">close</span>
+                </button>
+          
+                <!-- Contenido del modal -->
+                <div class="p-4 md:p-5 text-center">
+                  <span class="material-symbols-outlined text-4xl text-gray-500 dark:text-gray-400 mb-3">lyrics</span>
+                  <article class="text-left">
+                    <!-- Título del modal -->
+                    <h3 class="mb-5 text-lg font-semibold text-gray-600 dark:text-gray-300">{{title?.toUpperCase()}}</h3>
+          
+                    <!-- Texto justificado -->
+                    <p class="text-justify text-gray-500 dark:text-gray-400 max-h-40 overflow-auto">
+                      {{notas?.toLocaleUpperCase()}}
+                    </p>
+                  </article>
+          
+                  <!-- Botón de edición -->
+                  <button 
+                    type="button" 
+                    class="mt-5 py-2.5 px-5 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-blue-700 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                    Editar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+          
+        }
+      <tr [ngClass]="{'bg-gris text-white line-through': tarea.estado, 'bg-sky-700 text-white': !tarea.estado}">
         <td class="px-4 py-2">
           <input type="checkbox" name="selectedTask"   class="mr-4 h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-600 rounded" 
          [(ngModel)]="tarea.estado" 
@@ -58,10 +101,14 @@
          }@else{
           <td class="px-4 py-2">Pendiente</td>
          }
-         
+         <td class="px-4 py-2">
+          <button (click)="verNotas(tarea.notas)" (click)="openForm(false)" class="hover: "><span class="material-symbols-outlined"> description</span>
+           
+            </button>
+         </td>
         
          <td class="px-4 py-2">
-          <button (click)="borrarTarea(tarea.id)"><span class="material-symbols-outlined">
+         <button (click)="borrarTarea(tarea.id)"><span class="material-symbols-outlined">
             delete
             </span></button>
         </td>
@@ -75,7 +122,7 @@
 <footer class="bg-black">
   <div class="flex justify-center">
     <ul>
-      <li><a href="#" class="text-white">facebook</a></li>
+      <li><a href="#"  class="text-white">facebook</a></li>
       <li><a href="#" class="text-white">Instagram</a></li>
       <li><a href="#" class="text-white">juanitoCode</a></li>
     </ul>

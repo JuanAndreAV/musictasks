@@ -8,10 +8,10 @@ module.exports = {
       colors: {
         'gris': '#6E6E6E',
         'beige': '#CAC0B3'
-      }
-    },
+      },
     
   },
   plugins: [],
 }
 
+}

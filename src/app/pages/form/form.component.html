@@ -1,18 +1,22 @@
 
-<button routerLink="/home">home</button>
 
-<div class="m-auto flex items-center justify-center h-screen ">
+
+
     
+<div class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50" (click)="closeForm(false)">
+  <div class="bg-white p-8 rounded-lg relative" (click)="$event.stopPropagation()">
+    <h2 class="text-xl mb-4">Agregar Tarea</h2>
 
-
-    <form class="max-w-sm mx-auto bg-slate-300 p-2">
+    <form [formGroup]="form()" class="max-w-sm mx-auto  p-2">
         <div class="mb-5">
+          <p class="text-center text-blue-800">{{succes}}</p>
           <label for="tarea" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tarea</label>
-          <input type="text" id="tarea" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Escalas" required />
+          <input formControlName="tarea" type="text" id="tarea" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Escalas" required />
+          <p class="text-center text-emerald-900 ">{{mensaje}}</p>
         </div>
         <div class="mb-5">
             <label for="categoria" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Categoría:</label>
-            <select id="categoria" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <select formControlName="categoria" id="categoria" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
           
               <option>Técnica</option>
               <option>Repertorio</option>
@@ -22,16 +26,17 @@
         </div>
         <div class="mb-5">
             <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Notas</label>
-            <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="comentarios..."></textarea>
+            <textarea formControlName="notas" id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="comentarios..."></textarea>
         </div>
-        <div class="flex items-start mb-5">
+        <div class="flex justify-center mb-5">
           
-         
+          <button type="button" (click)="lectura()" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Registrar tarea</button>
         </div>
-        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Registrar tarea</button>
+       
+        
       </form>
       
-  
+  </div> 
 </div>
 
   

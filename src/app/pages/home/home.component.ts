@@ -1,25 +1,63 @@
-import { Component, computed, effect, OnInit, signal } from '@angular/core';
+import { Component, computed, signal, inject, effect } from '@angular/core';
 import { FormControl, FormGroup,FormsModule,ReactiveFormsModule, Validators } from '@angular/forms';
 import { Tareas } from '../../interfaces/tareas';
 import { Title } from '@angular/platform-browser';
 import { filter, find } from 'rxjs';
 import { NgClass } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { TareasService } from '../../services/tareas.service';
+import { FormComponent } from '../form/form.component';
+import { NotesComponent } from '../notes/notes.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ReactiveFormsModule, NgClass, FormsModule, RouterLink],
+  imports: [ReactiveFormsModule, NgClass, FormsModule, RouterLink, FormComponent, NotesComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnInit  {
-tareas = signal<Tareas[]>([]);
+export class HomeComponent  {
+//tareas = signal<Tareas[]>([]);
 filtro = signal<string>('all');
+notas: string | undefined = 'No hay notas registradas'
+title: string | undefined = '';
 
-renderizado(){
-  const tareas = this.tareas();
-  const filtro = this.filtro()
+tareaService = inject(TareasService)
+
+isFormVisible = false;
+isNotesVisible = false;
+
+// Mostrar el formulario (modal)
+openForm(vista: boolean) {
+if(vista){
+  this.isFormVisible = true;
+}else{
+  this.isNotesVisible = true
+}
+  
+}
+
+// Cerrar el formulario (modal)
+closeForm(vista: boolean) {
+  if(vista){
+    this.isFormVisible = false;
+  }else{
+    this.isNotesVisible = false;
+  }
+}
+
+constructor(){
+  // effect(()=>{
+  //   const tareas = this.tareas();
+  //   localStorage.setItem('tareas', JSON.stringify(tareas));
+  // })
+ 
+}
+
+renderizado = computed(()=>{
+  const tareas = this.tareaService.tareasForm();
+  const filtro = this.filtro();
+
   if (filtro === 'completed') {
     
     return tareas.filter(task=> task.estado)//
@@ -28,7 +66,9 @@ renderizado(){
     return tareas.filter(task=> !task.estado)//
   }
   return tareas
-}
+})
+  
+
 
 
 setFilter(filter: string){
@@ -41,51 +81,48 @@ setFilter(filter: string){
 
 tareaForm = new FormControl('',[Validators.required, Validators.minLength(4)]);
 
-constructor(){
-  effect(()=>{
-    const tareas = this.tareas();
-    localStorage.setItem('tareas', JSON.stringify(tareas));
-  })
-}
-agregarTarea(){
-  if(this.tareaForm.valid){
-    const tareas = {
-      id: Date.now(),
-      title: this.tareaForm.value?.trim(),
-      estado: false
+
+// agregarTarea(){
+//   if(this.tareaForm.valid){
+//     const tareas = {
+//       id: Date.now(),
+//       title: this.tareaForm.value?.trim(),
+//       estado: false
      
-    }
-    this.tareas.update((tarea)=>[...tarea, tareas]) 
+//     }
+//     this.tareas.update((tarea)=>[...tarea, tareas]) 
     
-   this.tareaForm.reset()
-  }
-}
+//    this.tareaForm.reset()
+//   }
+// }
 
 borrarTarea(id: any){
-  this.tareas.update((task)=>task.filter(task => task.id !== id))
+this.tareaService.delete(id)
 }
 
-ngOnInit(): void {
-  const storage = localStorage.getItem('tareas');
-    if (storage){
-      const tasks = JSON.parse(storage);
-      this.tareas.set(tasks)
-    }
-    
+verNotas(id: any){
+  const buscarNotas = this.tareaService.tareasForm().find((tarea)=> tarea.notas  === id);
+  const notas = buscarNotas?.notas
+  const title = buscarNotas?.title
+ this.notas = notas;
+ this.title = title;
 }
+
+
+// ngOnInit(): void {
+//   const storage = localStorage.getItem('tareas');
+//     if (storage){
+//       const tasks = JSON.parse(storage);
+//       this.tareaService.tareasForm.set(tasks)
+//     }
+    
+// }
+
+
 
 onCheck(index: any){
-
- // const state = this.tareas().filter((i)=> i.id === index )[0].estado
-  
-  const estado = this.tareas().map(tarea => tarea.id === index ? {...tarea, estado: !tarea.estado} : tarea);
-
-
-  this.tareas.set(estado)
-  
-
+  this.tareaService.onCheck(index)
 }
-
 
 
 }
