@@ -27,6 +27,9 @@ tareaService = inject(TareasService)
 isFormVisible = false;
 isNotesVisible = false;
 
+
+// Método que se ejecuta al hacer clic en el botón
+
 // Mostrar el formulario (modal)
 openForm(vista: boolean) {
 if(vista){
