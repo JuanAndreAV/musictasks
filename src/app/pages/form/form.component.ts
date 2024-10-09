@@ -25,7 +25,7 @@ tareaService = inject(TareasService);
   form = signal<FormGroup>(
     new FormGroup({
       tarea: new FormControl('',[Validators.required, Validators.minLength(4)]),
-      categoria: new FormControl('tecnica',[Validators.required]),
+      categoria: new FormControl('Técnica',[Validators.required]),
       notas: new FormControl('')
     })
   )

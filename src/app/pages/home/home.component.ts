@@ -4,15 +4,17 @@ import { Tareas } from '../../interfaces/tareas';
 import { Title } from '@angular/platform-browser';
 import { filter, find } from 'rxjs';
 import { NgClass } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Event, RouterLink } from '@angular/router';
 import { TareasService } from '../../services/tareas.service';
 import { FormComponent } from '../form/form.component';
-import { NotesComponent } from '../notes/notes.component';
+import { CategoriasComponent } from '../categorias/categorias.component';
+import {CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray, CdkDropListGroup} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ReactiveFormsModule, NgClass, FormsModule, RouterLink, FormComponent, NotesComponent],
+  imports: [ReactiveFormsModule, NgClass, FormsModule, RouterLink, FormComponent, 
+    CategoriasComponent, CdkDrag, CdkDropListGroup, CdkDropList],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -21,9 +23,15 @@ export class HomeComponent  {
 filtro = signal<string>('all');
 notas: string | undefined = 'No hay notas registradas'
 title: string | undefined = '';
+category: string | undefined = '';
 
 tareaService = inject(TareasService)
-
+drop(event:  CdkDragDrop<Tareas[]>): void {
+  moveItemInArray(this.tareaService.tareasForm(), event.previousIndex, event.currentIndex);
+  
+  // Luego llamar al método para registrar o guardar el nuevo orden
+  //this.tareaService.registro(this.tareaService.tareasForm());
+}
 isFormVisible = false;
 isNotesVisible = false;
 
@@ -68,7 +76,9 @@ renderizado = computed(()=>{
   if(filtro === 'pending'){
     return tareas.filter(task=> !task.estado)//
   }
+  
   return tareas
+  
 })
   
 
@@ -104,11 +114,13 @@ this.tareaService.delete(id)
 }
 
 verNotas(id: any){
-  const buscarNotas = this.tareaService.tareasForm().find((tarea)=> tarea.notas  === id);
+  const buscarNotas = this.tareaService.tareasForm().find((tarea)=> tarea.title  === id);
   const notas = buscarNotas?.notas
   const title = buscarNotas?.title
+  const categoria = buscarNotas?.category
  this.notas = notas;
  this.title = title;
+ this.category = categoria;
 }
 
 
@@ -125,6 +137,7 @@ verNotas(id: any){
 
 onCheck(index: any){
   this.tareaService.onCheck(index)
+  
 }
 
 

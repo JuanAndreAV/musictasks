@@ -9,6 +9,7 @@ export class TareasService  {
 
   constructor() {
     // Inicializa el localStorage si hay datos guardados
+    //localStorage.clear()
     const storage = localStorage.getItem('tareas');
     if (storage) {
       const tasks = JSON.parse(storage);

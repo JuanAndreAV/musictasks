@@ -1,6 +1,4 @@
-<header class="bg-gradient-to-r from-sky-800 from-10% via-sky-700 via-30% to-sky-600 to-90% p-4  ">
-    <h1 class="text-center text-white text-5xl font-juanito md:text-9xl">MusTasks:</h1>
-</header>
+
 <body class=" bg-white grid justify-items-center">
   <div class="grid grid-rows-2 justify-center">
     <section class="flex justify-center  mt-5 h-20 grow-0">
@@ -15,29 +13,26 @@
                 Realizado
               </button>  
         </div>
-    </section>
-    <section class="grid place-items-end   mt-2 mb-10 w-full  h-20 grow-0">
+      </section>
+     <section class="flex place-items-end   mt-2 mb-10 w-full  h-20 grow-0">
+      <a [routerLink]="['/categorias']" class=" flex items-center bg-blue-900 text-white p-2   rounded hover:bg-blue-950 "><span class="material-symbols-outlined">
+        bookmark
+        </span>categorias</a>
         <div class="grid justify-items-end   mb-4 w-4/5 ">
           <div class="p-8">
-            <button class=" flex items-center bg-green-800 text-white p-2   rounded" (click)="openForm(true)"> <span class="material-symbols-outlined">music_note</span> 
+            <button (click)="openForm(true)" class=" flex items-center bg-green-800 text-white p-2   rounded hover:bg-green-950 " > <span class="material-symbols-outlined">music_note</span> 
              Agregar tarea</button>
           </div>
         <!--<label class="block text-gray-700 text-sm font-bold mb-2" for="tarea"><button routerLink='/nuevaTarea'>Nueva tarea</button></label>-->
-            
-           
            <!-- <input [formControl]="tareaForm" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="tarea" type="text" placeholder="Ingresa nueva tarea"(keydown.enter)="agregarTarea()">-->
             @if(isFormVisible){
               <app-form  (formClosed)="closeForm(true)"></app-form>
             }
-           
         </div>
-        
     </section>
   </div>
-  <div class=" flex  w-full">
-    
-    
-    <table class=" min-w-full text-left table-auto ">
+  <div class="w-full overflow-x-auto">
+    <table cdkDropListGroup class=" min-w-full text-left table-auto ">
     <thead>
       <tr class=" text-gray-700">
         <th class="px-1 py-2">Seleccionar</th>
@@ -47,97 +42,95 @@
         <th class="px-1 py-2">Borrar</th>
       </tr>
     </thead>
-    <tbody class="">
-
+   
+    <tbody  cdkDropList  (cdkDropListDropped)="drop($event)" class="">
       @for (tarea of renderizado(); track tarea.id ) {
         @if (isNotesVisible) {
-          <section class="absolute top-0 left-0 w-full h-full z-40 flex justify-center items-center pointer-events-none">
-  <div class="overflow-y-auto overflow-x-hidden w-full max-w-md p-4 pointer-events-auto">
-    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 w-full max-h-[90vh]">
-      <!-- Botón de cierre -->
-      <button 
-        type="button" 
-        (click)="closeForm(false)" 
-        class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
-        <span class="material-symbols-outlined">close</span>
-      </button>
+          <section  class="absolute top-0 left-0 w-full h-full z-40 flex justify-center items-center pointer-events-none">
+            <div class="overflow-y-auto overflow-x-hidden w-full max-w-md p-4 pointer-events-auto">
+             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 w-full max-h-[90vh]">
+                <!-- Botón de cierre -->
+                <button 
+                   type="button" 
+                    (click)="closeForm(false)" 
+                    class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
+                       <span class="material-symbols-outlined">close</span>
+                 </button>
 
-      <!-- Contenido del modal -->
-      <div class="p-4 md:p-5 text-center">
-        <span class="material-symbols-outlined text-4xl text-gray-500 dark:text-gray-400 mb-3">lyrics</span>
-        <article class="text-left">
-          <!-- Título del modal -->
-          <h3 class="mb-5 text-lg font-semibold text-gray-600 dark:text-gray-300">
-            {{ title?.toUpperCase() }}
-          </h3>
-          <h2> {{tarea?.categoria}}</h2>
+                    <!-- Contenido del modal -->
+            <div class="p-4 md:p-5 text-center">
+              <span class="material-symbols-outlined text-4xl text-gray-500 dark:text-gray-400 mb-3">lyrics</span>
+              <article class="text-left">
+                <!-- Título del modal -->
+                <h3 class="mb-5 text-lg font-semibold text-gray-600 dark:text-gray-300">
+                  {{ title?.toUpperCase() }}
+                </h3>
+                <h2 class="mb-5 text-sm font-semibold text-gray-800 dark:text-gray-300">Categoría: {{category}}</h2>
 
-          <!-- Texto justificado -->
-          <p class="text-justify text-gray-500 dark:text-gray-400 overflow-auto">
-            {{ notas?.toLocaleUpperCase() }}
-          </p>
-        </article>
+                <!-- Texto justificado -->
+                <p class="text-justify text-gray-500 dark:text-gray-400 overflow-auto">
+                  {{ notas?.toLocaleUpperCase() }}
+                </p>
+              </article>
 
-        <!-- Botón de edición -->
-        <button 
-          type="button" (click)="closeForm(false)"
-          class="mt-5 py-2.5 px-5 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-blue-700 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-          cerrar
-        </button>
-      </div>
-    </div>
-  </div>
-</section>
+              <button 
+                type="button" (click)="closeForm(false)"
+                class="mt-5 py-2.5 px-5 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-blue-700 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                cerrar
+              </button>
+            </div>
+            </div>
+            </div>
+  </section>
 
         }
-      <tr [ngClass]="{'bg-gris text-white line-through': tarea.estado, 'bg-sky-800 text-white': !tarea.estado}">
+        
+      <tr cdkDrag  [ngClass]="{'bg-gris text-white line-through': tarea.estado, 'bg-sky-600 text-white': !tarea.estado}" >
         <td class="px-4 py-2">
           <input type="checkbox" name="selectedTask"   class="mr-4 h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-600 rounded" 
          [(ngModel)]="tarea.estado" 
          (change)="onCheck(tarea)">
         </td>
         <!-- Nombre de la tarea -->
-        <td class="px-2 py-2">{{ tarea?.title }}</td>
+        <td class="px-2 py-2 break-words whitespace-normal">{{ tarea?.title }}</td>
         <!-- Estado de la tarea -->
          @if(tarea.estado) {
-          <td class="px-6 py-2"><span class="material-symbols-outlined">
-            task_alt
-            </span></td>
+          
+          <td class="px-6 py-2 relative inline-block">
+            <span class="absolute bottom-full left-1/2 transform -translate-x-1/2 translate-y-1 mb-2 px-2 py-1 text-sm text-white bg-gray-800 rounded opacity-0 hover:opacity-100 transition-opacity duration-300">
+              Tarea Realizada</span>
+            <span class="material-symbols-outlined cursor-pointer">
+              task_alt
+              </span>
+          </td>
+          
          }@else{
-          <td class="px-6 py-2"><span class="material-symbols-outlined">
+          <td class="px-6 py-2 relative inline-block"><span class="material-symbols-outlined">
             pending_actions 
+            </span> <span class="absolute bottom-full left-1/2 transform -translate-x-1/2 translate-y-1 mb-2 px-2 py-1 text-sm text-white bg-gray-800 rounded opacity-0 hover:opacity-100 transition-opacity duration-300">
+              Tarea pendiente
             </span></td>
+          
          }
+         
          <td class="px-4 py-2">
-          <button (click)="verNotas(tarea.notas); openForm(false)" class="hover: "><span class="material-symbols-outlined" > description</span>
+          <button (click)="verNotas(tarea.title); openForm(false)" class="active:text-emerald-600 hover:text-emerald-400 "><span class="material-symbols-outlined" > description</span>
            
             </button>
          </td>
         
          <td class="px-4 py-2">
-         <button (click)="borrarTarea(tarea.id)"><span class="material-symbols-outlined">
+         <button (click)="borrarTarea(tarea.id) "><span class="material-symbols-outlined">
             delete
             </span></button>
         </td>
       </tr>
-     }
+    }
     </tbody>
-    
+  
   </table>
 
 </div>
  
 </body>
-<footer class="bg-black text-white py-6 w-full ">
-  <div class="container mx-auto text-center">
-    <p class="text-lg font-semibold">MusTask - Organiza tus tareas musicales</p>
-    <div class="flex justify-center space-x-6 my-4">
-      <a href="#" class="hover:text-yellow-400">Bratschefest</a>
-      <a href="#" class="hover:text-yellow-400">Acerca de</a>
-      <a href="#" class="hover:text-yellow-400">Contacto</a>
-    </div>
-    <div class="mt-4">
-      <a href="" class="hover:text-yellow-400">&copy; 2024 MusTask. JuanitoCode</a>
-    </div>
-  </div>
-</footer>
+

@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { Routes } from '@angular/router';
-import { FormComponent } from './pages/form/form.component';
+
 import { HomeComponent } from './pages/home/home.component';
+import { CategoriasComponent } from './pages/categorias/categorias.component';
 
 export const routes: Routes = [
    {
-    path: 'nuevaTarea',
-    component: FormComponent
+    path: 'categorias',
+    component: CategoriasComponent
    },
    {
     path: 'home',

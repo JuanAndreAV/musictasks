@@ -2,6 +2,6 @@ export interface Tareas {
     id?: number,
     title?: string,
     estado?: boolean,
-    categoria?: string,
+    category?: string,
     notas?: string
 }
