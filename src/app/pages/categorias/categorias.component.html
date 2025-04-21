@@ -1,121 +1,132 @@
-<a [routerLink]="['/home']" class=" flex items-center bg-blue-900 text-white p-2  w-20 rounded hover:bg-blue-950 "><span class="material-symbols-outlined">
-    home
-    </span>home</a>
-    <h2 class="text-2xl font-bold mb-6 text-center">Tareas por Categoría</h2>
-    <div class="flex justify-center mt-6">
-      <div class="relative inline-block">
-        <select [(ngModel)]="selectedCategory" class="block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-2 px-4 pr-8 rounded-lg leading-tight focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500">
-          <option value="tecnica">Técnica</option>
-          <option value="repertorio">Repertorio</option>
-          <option value="composicion">Composición</option>
-          <option value="ensayo">Ensayo</option>
-        </select>
-        <div class="absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 pointer-events-none">
-          <span class="material-symbols-outlined">expand_more</span>
-        </div>
+<div class="container mx-auto px-2 sm:px-4 py-4 max-w-6xl">
+  <!-- Botón de inicio compacto para móvil -->
+  <div class="flex justify-between items-center mb-4">
+    <a [routerLink]="['/home']" class="flex items-center gap-1 bg-gradient-to-r from-blue-700 to-blue-800 text-white px-3 py-2 rounded-lg shadow hover:from-blue-800 hover:to-blue-900 transition-all duration-300 text-sm sm:text-base">
+      <span class="material-symbols-outlined text-lg">home</span>
+      <span class="hidden xs:inline">Inicio</span>
+    </a>
+  </div>
+
+  <!-- Título optimizado para móvil -->
+  <div class="text-center mb-6">
+    <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-2 font-juanito">Tareas por Categoría</h2>
+    <div class="w-16 sm:w-24 h-1 bg-gradient-to-r from-sky-500 to-blue-600 mx-auto rounded-full"></div>
+  </div>
+
+  <!-- Selector de categoría responsive -->
+  <div class="flex justify-center mb-6">
+    <div class="relative w-full max-w-xs sm:max-w-md">
+      <select [(ngModel)]="selectedCategory" 
+              class="block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-2 px-3 pr-8 rounded-lg text-sm sm:text-base leading-tight focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-200 shadow-sm cursor-pointer">
+        <option value="tecnica" class="py-1">🎻 Técnica</option>
+        <option value="repertorio" class="py-1">📜 Repertorio</option>
+        <option value="composicion" class="py-1">🎼 Composición</option>
+        <option value="ensayo" class="py-1">🎵 Ensayo</option>
+      </select>
+      <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none text-gray-500">
+        <span class="material-symbols-outlined text-lg">expand_more</span>
       </div>
     </div>
+  </div>
 
-    <div class="w-full overflow-x-auto">
-      <table class=" min-w-full text-left table-auto ">
-      <thead>
-        <tr class=" text-gray-700">
-          <th class="px-1 py-2">Seleccionar</th>
-          <th class="px-4 py-2"> Tarea</th>
-          <th class="px-4 py-2">Estado</th>
-          <th class="px-2 py-2">Notas</th>
-          <th class="px-1 py-2">Borrar</th>
+  <!-- Tabla optimizada para móvil -->
+  <div class="bg-white rounded-lg shadow-sm overflow-x-auto border border-gray-200">
+    <table class="min-w-full divide-y divide-gray-200 text-sm sm:text-base">
+      <thead class="bg-gradient-to-r from-sky-600 to-blue-700">
+        <tr>
+          <th class="px-2 py-2 sm:px-4 sm:py-3 text-left text-xs font-medium text-white uppercase tracking-wider">✓</th>
+          <th class="px-2 py-2 sm:px-4 sm:py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Tarea</th>
+          <th class="px-2 py-2 sm:px-4 sm:py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Estado</th>
+          <th class="px-2 py-2 sm:px-4 sm:py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Notas</th>
+          <th class="px-2 py-2 sm:px-4 sm:py-3 text-left text-xs font-medium text-white uppercase tracking-wider">✕</th>
         </tr>
       </thead>
-      <tbody class="">
-  
-        @for (tarea of renderizado(); track tarea.id ) {
+      
+      <tbody class="bg-white divide-y divide-gray-200">
+        @for (tarea of renderizado(); track tarea.id) {
           @if (isNotesVisible) {
-            <section class="absolute top-0 left-0 w-full h-full z-40 flex justify-center items-center pointer-events-none">
-              <div class="overflow-y-auto overflow-x-hidden w-full max-w-md p-4 pointer-events-auto">
-               <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 w-full max-h-[90vh]">
-                  <!-- Botón de cierre -->
-                  <button 
-                     type="button" 
-                      (click)="closeForm(false)" 
-                      class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
-                         <span class="material-symbols-outlined">close</span>
-                   </button>
-  
-        <!-- Contenido del modal -->
-              <div class="p-4 md:p-5 text-center">
-                <span class="material-symbols-outlined text-4xl text-gray-500 dark:text-gray-400 mb-3">lyrics</span>
-                <article class="text-left">
-                  <!-- Título del modal -->
-                  <h3 class="mb-5 text-lg font-semibold text-gray-600 dark:text-gray-300">
-                    {{ title?.toUpperCase() }}
-                  </h3>
-                  <h2 class="mb-5 text-sm font-semibold text-gray-800 dark:text-gray-300">Categoría: {{category}}</h2>
-  
-                  <!-- Texto justificado -->
-                  <p class="text-justify text-gray-500 dark:text-gray-400 overflow-auto">
-                    {{ notas?.toLocaleUpperCase() }}
-                  </p>
-                </article>
-  
-                <!-- Botón de edición -->
-                <button 
-                  type="button" (click)="closeForm(false)"
-                  class="mt-5 py-2.5 px-5 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-blue-700 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-                  cerrar
-                </button>
+            <!-- Modal optimizado para móvil -->
+            <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-2 sm:p-4">
+              <div class="bg-white rounded-lg shadow-lg w-full max-h-[90vh] overflow-hidden border border-gray-200">
+                <div class="p-4 sm:p-6">
+                  <div class="flex justify-between items-start mb-3">
+                    <div>
+                      <h3 class="text-lg sm:text-xl font-bold text-gray-800 truncate">{{ title?.toUpperCase() }}</h3>
+                      <p class="text-xs sm:text-sm text-gray-600 mt-1">Categoría: {{category}}</p>
+                    </div>
+                    <button (click)="closeForm(false)" class="text-gray-400 hover:text-gray-600 transition-colors">
+                      <span class="material-symbols-outlined">close</span>
+                    </button>
+                  </div>
+                  
+                  <div class="bg-gray-50 p-3 rounded mb-3 max-h-[40vh] overflow-y-auto text-xs sm:text-sm">
+                    <p class="text-gray-700 whitespace-pre-line">{{ notas?.toLocaleUpperCase() }}</p>
+                  </div>
+                  
+                  @if (enlace) {
+                    <a [href]="tarea.enlace" target="_blank" 
+                       class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors text-sm">
+                      <span class="material-symbols-outlined text-base mr-1">link</span>
+                      Abrir Enlace
+                    </a>
+                  }
+                  
+                  <div class="mt-4 flex justify-end">
+                    <button (click)="closeForm(false)"
+                            class="px-3 py-1 sm:px-4 sm:py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition-colors text-sm">
+                      Cerrar
+                    </button>
+                  </div>
+                </div>
               </div>
-              </div>
-              </div>
-    </section>
-  
+            </div>
           }
-        <tr [ngClass]="{'bg-gris text-white line-through': tarea.estado, 'bg-sky-600 text-white': !tarea.estado}">
-          <td class="px-4 py-2">
-            <input type="checkbox" name="selectedTask"   class="mr-4 h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-600 rounded" 
-           [(ngModel)]="tarea.estado" 
-           (change)="onCheck(tarea)">
-          </td>
-          <!-- Nombre de la tarea -->
-          <td class="px-2 py-2 break-words whitespace-normal">{{ tarea?.title }}</td>
-          <!-- Estado de la tarea -->
-           @if(tarea.estado) {
-            
-            <td class="px-6 py-2 relative inline-block">
-              <span class="absolute bottom-full left-1/2 transform -translate-x-1/2 translate-y-1 mb-2 px-2 py-1 text-sm text-white bg-gray-800 rounded opacity-0 hover:opacity-100 transition-opacity duration-300">
-                Tarea Realizada</span>
-              <span class="material-symbols-outlined cursor-pointer">
-                task_alt
-                </span>
+          
+          <tr [ngClass]="{'bg-gray-50': !tarea.estado, 'bg-green-50': tarea.estado}" class="hover:bg-gray-100">
+            <td class="px-2 py-3 sm:px-4 sm:py-4 whitespace-nowrap">
+              <input type="checkbox" name="selectedTask" 
+                     class="h-4 w-4 sm:h-5 sm:w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500 cursor-pointer"
+                     [(ngModel)]="tarea.estado" 
+                     (change)="onCheck(tarea)">
             </td>
             
-           }@else{
-            <td class="px-6 py-2 relative inline-block"><span class="material-symbols-outlined">
-              pending_actions 
-              </span> <span class="absolute bottom-full left-1/2 transform -translate-x-1/2 translate-y-1 mb-2 px-2 py-1 text-sm text-white bg-gray-800 rounded opacity-0 hover:opacity-100 transition-opacity duration-300">
-                Tarea pendiente
-              </span></td>
+            <td class="px-2 py-3 sm:px-4 sm:py-4 max-w-[120px] sm:max-w-xs break-words">
+              <span [ngClass]="{'line-through text-gray-500': tarea.estado}" class="text-sm sm:text-base">
+                {{ tarea?.title }}
+              </span>
+            </td>
             
-           }
-           
-           <td class="px-4 py-2">
-            <button (click)="verNotas(tarea.title); openForm(false)" class="active:text-emerald-600 hover:text-emerald-400 "><span class="material-symbols-outlined" > description</span>
-             
+            <td class="px-2 py-3 sm:px-4 sm:py-4 whitespace-nowrap">
+              @if(tarea.estado) {
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs bg-green-100 text-green-800">
+                  <span class="material-symbols-outlined text-xs sm:text-sm mr-0.5">task_alt</span>
+                  <span class="hidden sm:inline">Completado</span>
+                </span>
+              } @else {
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs bg-yellow-100 text-yellow-800">
+                  <span class="material-symbols-outlined text-xs sm:text-sm mr-0.5">pending_actions</span>
+                  <span class="hidden sm:inline">Pendiente</span>
+                </span>
+              }
+            </td>
+            
+            <td class="px-2 py-3 sm:px-4 sm:py-4 whitespace-nowrap">
+              <button (click)="verNotas(tarea.title); openForm(false)" 
+                      class="text-gray-500 hover:text-blue-600 transition-colors p-1">
+                <span class="material-symbols-outlined text-lg">description</span>
               </button>
-           </td>
-          
-           <td class="px-4 py-2">
-           <button (click)="borrarTarea(tarea.id) "><span class="material-symbols-outlined">
-              delete
-              </span></button>
-          </td>
-        </tr>
-       }
+            </td>
+            
+            <td class="px-2 py-3 sm:px-4 sm:py-4 whitespace-nowrap">
+              <button (click)="borrarTarea(tarea.id)"
+                      class="text-gray-500 hover:text-red-600 transition-colors p-1">
+                <span class="material-symbols-outlined text-lg">delete</span>
+              </button>
+            </td>
+          </tr>
+        }
       </tbody>
-      
     </table>
-  
   </div>
-    
-
+</div>
       

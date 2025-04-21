@@ -1,15 +1,15 @@
 import { Component, inject, computed, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NgClass } from '@angular/common';
 import { TareasService } from '../../services/tareas.service';
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { FormControl, FormsModule, NgModel } from '@angular/forms';
-import { FormComponent } from '../form/form.component';
+
+
+
 @Component({
   selector: 'app-categorias',
   standalone: true,
-  imports: [RouterLink, DragDropModule, NgClass, FormsModule],
+  imports: [RouterLink, NgClass, FormsModule],
 
   templateUrl: './categorias.component.html',
   styleUrl: './categorias.component.css'
@@ -19,10 +19,15 @@ export class CategoriasComponent {
   notas: string | undefined = 'No hay notas registradas'
   title: string | undefined = '';
   category: string | undefined = '';
+  enlace:  string | undefined = '';
+
   selectedCategory = signal<string>('tecnica');
 
   tareaService = inject(TareasService)
-  
+
+ 
+
+
   isFormVisible = false;
   isNotesVisible = false;
   
@@ -93,9 +98,11 @@ export class CategoriasComponent {
     const notas = buscarNotas?.notas
     const title = buscarNotas?.title
     const categoria = buscarNotas?.category
-   this.notas = notas;
-   this.title = title;
-   this.category = categoria;
+    const enlace = buscarNotas?.enlace
+    this.notas = notas;
+    this.title = title;
+    this.category = categoria;
+    this.enlace = enlace;
   }
   
   onCheck(index: any){

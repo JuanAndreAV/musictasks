@@ -11,7 +11,7 @@
         <div class="mb-5">
           <p class="text-center text-blue-800">{{succes}}</p>
           <label for="tarea" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tarea</label>
-          <input formControlName="tarea" type="text" id="tarea" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Escalas" required />
+          <input formControlName="tarea" type="text" id="tarea" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Ej: escalas" required />
           <p class="text-center text-emerald-900 ">{{mensaje}}</p>
         </div>
         <div class="mb-5">
@@ -27,6 +27,10 @@
         <div class="mb-5">
             <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Notas</label>
             <textarea formControlName="notas" id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="comentarios..."></textarea>
+        </div>
+        <div class="mb-4">
+          <label for="link" class="block text-sm font-medium text-gray-700">Enlace</label>
+          <input id="link" formControlName="enlace" type="url" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="https://ejemplo.com">
         </div>
         <div class="flex justify-center mb-5">
           

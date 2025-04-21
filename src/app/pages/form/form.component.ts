@@ -26,7 +26,8 @@ tareaService = inject(TareasService);
     new FormGroup({
       tarea: new FormControl('',[Validators.required, Validators.minLength(4)]),
       categoria: new FormControl('Técnica',[Validators.required]),
-      notas: new FormControl('')
+      notas: new FormControl(''),
+      enlace: new FormControl('',[ Validators.pattern('https?://.+')])
     })
   )
 
@@ -39,6 +40,7 @@ tareaService = inject(TareasService);
         title: this.form().value?.tarea.trim(),
         category: this.form().value?.categoria.trim(),
         notas: this.form().value?.notas.trim(),
+        enlace: this.form().value?.enlace.trim(),
         estado: false
        
       }

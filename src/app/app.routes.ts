@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 
 import { HomeComponent } from './pages/home/home.component';
 import { CategoriasComponent } from './pages/categorias/categorias.component';
+import { RecomendadosComponent } from './pages/recomendados/recomendados.component';
 
 export const routes: Routes = [
    {
@@ -16,5 +17,9 @@ export const routes: Routes = [
    {
     path: '',
     component: HomeComponent
+   },
+   {
+      path: 'recomendados',
+      component: RecomendadosComponent
    }
 ];

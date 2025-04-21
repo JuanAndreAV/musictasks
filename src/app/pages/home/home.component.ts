@@ -7,14 +7,14 @@ import { NgClass } from '@angular/common';
 import { Event, RouterLink } from '@angular/router';
 import { TareasService } from '../../services/tareas.service';
 import { FormComponent } from '../form/form.component';
-import { CategoriasComponent } from '../categorias/categorias.component';
+import { AiService } from '../../services/ai.service';
 import {CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray, CdkDropListGroup} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [ReactiveFormsModule, NgClass, FormsModule, RouterLink, FormComponent, 
-    CategoriasComponent, CdkDrag, CdkDropListGroup, CdkDropList],
+     CdkDrag, CdkDropListGroup, CdkDropList],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -24,10 +24,13 @@ filtro = signal<string>('all');
 notas: string | undefined = 'No hay notas registradas'
 title: string | undefined = '';
 category: string | undefined = '';
+enlace :  string | undefined = '';
+
 
 tareaService = inject(TareasService)
 drop(event:  CdkDragDrop<Tareas[]>): void {
   moveItemInArray(this.tareaService.tareasForm(), event.previousIndex, event.currentIndex);
+
   
   // Luego llamar al método para registrar o guardar el nuevo orden
   //this.tareaService.registro(this.tareaService.tareasForm());
@@ -57,13 +60,14 @@ closeForm(vista: boolean) {
   }
 }
 
-constructor(){
-  // effect(()=>{
-  //   const tareas = this.tareas();
-  //   localStorage.setItem('tareas', JSON.stringify(tareas));
-  // })
+constructor(aiService: AiService){
+  
+ aiService.aiAssistance({
+  prompt: "estudia kreutzer numero 2 de viola"
+ })
  
 }
+
 
 renderizado = computed(()=>{
   const tareas = this.tareaService.tareasForm();
@@ -118,9 +122,11 @@ verNotas(id: any){
   const notas = buscarNotas?.notas
   const title = buscarNotas?.title
   const categoria = buscarNotas?.category
+  const enlace = buscarNotas?.enlace
  this.notas = notas;
  this.title = title;
  this.category = categoria;
+ this.enlace = enlace;
 }
 
 
