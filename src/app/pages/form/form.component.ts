@@ -1,12 +1,11 @@
 import { Component, inject, signal, output } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { Tareas } from '../../interfaces/tareas';
 import { TareasService } from '../../services/tareas.service';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 @Component({
   selector: 'app-form',
   standalone: true,
-  imports: [RouterLink, ReactiveFormsModule],
+  imports: [ ReactiveFormsModule],
   templateUrl: './form.component.html',
   styleUrl: './form.component.css'
 })

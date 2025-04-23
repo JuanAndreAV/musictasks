@@ -1,7 +1,6 @@
 import { Component, computed, signal, inject, effect } from '@angular/core';
 import { FormControl, FormGroup,FormsModule,ReactiveFormsModule, Validators } from '@angular/forms';
 import { Tareas } from '../../interfaces/tareas';
-import { AssistanceComponent } from '../shared/assistance/assistance.component';
 import { NgClass } from '@angular/common';
 import { Event, RouterLink } from '@angular/router';
 import { TareasService } from '../../services/tareas.service';
@@ -12,7 +11,7 @@ import {CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray, CdkDropListGroup} fr
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ReactiveFormsModule,AssistanceComponent, NgClass, FormsModule, RouterLink, FormComponent, 
+  imports: [ReactiveFormsModule, NgClass, FormsModule, RouterLink, FormComponent, 
      CdkDrag, CdkDropListGroup, CdkDropList],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'

@@ -27,7 +27,19 @@
             <div [ngClass]="{'flex justify-end mb-3': message.sender === 'user', 'mb-3': message.sender === 'bot'}" class="animate-fade-in">
               <div [ngClass]="{'bg-blue-100 rounded-l-lg rounded-br-lg': message.sender === 'bot', 'bg-indigo-600 text-white rounded-r-lg rounded-bl-lg': message.sender === 'user'}" 
                    class="px-3 py-2 max-w-xs sm:max-w-md">
-                {{message.text}}
+               <markdown>{{message.text}}</markdown> 
+              </div> 
+            </div>
+            
+          }
+          @if (isLoading()) {
+            <div class="flex mb-3">
+              <div class="bg-blue-100 rounded-l-lg rounded-br-lg px-3 py-2 max-w-xs">
+                <div class="flex space-x-2">
+                  <div class="w-2 h-2 rounded-full bg-blue-600 animate-bounce"></div>
+                  <div class="w-2 h-2 rounded-full bg-blue-600 animate-bounce transition duration-300"></div>
+                  <div class="w-2 h-2 rounded-full bg-blue-600 animate-bounce"></div>
+                </div>
               </div>
             </div>
           }

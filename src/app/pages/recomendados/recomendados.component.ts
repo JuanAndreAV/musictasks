@@ -6,8 +6,8 @@ import { RouterLink } from '@angular/router';
   selector: 'app-recomendados',
   standalone: true,
   imports: [RouterLink, NgClass],
-  templateUrl: './recomendados.component.html',
-  styleUrl: './recomendados.component.css'
+  templateUrl: './recomendados.component.html'
+  
 })
 export class RecomendadosComponent {
 botones: any[] = [

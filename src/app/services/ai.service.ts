@@ -1,6 +1,6 @@
 import { inject, Injectable, signal,  } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Tareas } from '../interfaces/tareas';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +8,7 @@ import { Tareas } from '../interfaces/tareas';
 export class AiService  {
   private http = inject(HttpClient);
   aiResponse = signal('');
-  private aiUrl = 'http://localhost:3000/gpt'; 
+  private aiUrl = environment.apiUrl; 
 
   constructor() { }
   aiAssistance(prompt: any){
