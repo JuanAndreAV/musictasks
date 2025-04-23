@@ -1,4 +1,4 @@
-import { inject, Injectable,  } from '@angular/core';
+import { inject, Injectable, signal,  } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Tareas } from '../interfaces/tareas';
 
@@ -7,15 +7,12 @@ import { Tareas } from '../interfaces/tareas';
 })
 export class AiService  {
   private http = inject(HttpClient);
-
+  aiResponse = signal('');
   private aiUrl = 'http://localhost:3000/gpt'; 
 
   constructor() { }
   aiAssistance(prompt: any){
-    return this.http.post<any>(`${this.aiUrl}/music-tasks`,prompt )
-    .subscribe({
-      next: (response) => console.log(response),
-    })
+    return this.http.post<any>(`${this.aiUrl}/music-tasks`,prompt ) 
   }
  
   

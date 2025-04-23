@@ -75,6 +75,9 @@ export class CategoriasComponent {
     if(filtro === 'ensayo'){
       return tareas.filter(task=> task.category === 'Ensayo')//
     }
+    if(filtro === 'otro'){
+      return tareas.filter(task => task.category === 'Otro')
+    } 
     
     return tareas.filter(task=> task.category === 'Composición')
     

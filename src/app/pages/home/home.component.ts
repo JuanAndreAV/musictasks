@@ -1,8 +1,7 @@
 import { Component, computed, signal, inject, effect } from '@angular/core';
 import { FormControl, FormGroup,FormsModule,ReactiveFormsModule, Validators } from '@angular/forms';
 import { Tareas } from '../../interfaces/tareas';
-import { Title } from '@angular/platform-browser';
-import { filter, find } from 'rxjs';
+import { AssistanceComponent } from '../shared/assistance/assistance.component';
 import { NgClass } from '@angular/common';
 import { Event, RouterLink } from '@angular/router';
 import { TareasService } from '../../services/tareas.service';
@@ -13,7 +12,7 @@ import {CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray, CdkDropListGroup} fr
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ReactiveFormsModule, NgClass, FormsModule, RouterLink, FormComponent, 
+  imports: [ReactiveFormsModule,AssistanceComponent, NgClass, FormsModule, RouterLink, FormComponent, 
      CdkDrag, CdkDropListGroup, CdkDropList],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
@@ -62,9 +61,9 @@ closeForm(vista: boolean) {
 
 constructor(aiService: AiService){
   
- aiService.aiAssistance({
-  prompt: "estudia kreutzer numero 2 de viola"
- })
+//  aiService.aiAssistance({
+//   prompt: "estudia kreutzer numero 2 de viola"
+//  })
  
 }
 
@@ -96,7 +95,7 @@ setFilter(filter: string){
 
 
 
-tareaForm = new FormControl('',[Validators.required, Validators.minLength(4)]);
+//tareaForm = new FormControl('',[Validators.required, Validators.minLength(4)]);
 
 
 // agregarTarea(){
