@@ -54,7 +54,7 @@ tareaService = inject(TareasService);
   }
 
   lectura(){
-    console.log(this.form().value)
+    //console.log(this.form().value)
     this.enviarData()
     //this.formClosed.emit(false)
   }

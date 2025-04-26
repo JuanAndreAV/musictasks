@@ -3,12 +3,12 @@ import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './pages/shared/header/header.component';
 import { FooterComponent } from './pages/shared/footer/footer.component';
 import { AssistanceComponent } from './pages/shared/assistance/assistance.component';
-
+import { AiSuggestionsComponent } from './pages/ai-suggestions/ai-suggestions.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, AssistanceComponent, FooterComponent],
+  imports: [RouterOutlet, HeaderComponent, AssistanceComponent,AiSuggestionsComponent, FooterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

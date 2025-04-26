@@ -21,5 +21,6 @@ export const routes: Routes = [
    {
       path: 'recomendados',
       component: RecomendadosComponent
-   }
+   },
+  
 ];
