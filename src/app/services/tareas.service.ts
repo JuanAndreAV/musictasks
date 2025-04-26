@@ -19,9 +19,7 @@ export class TareasService  {
     // Guardar en localStorage solo cuando haya tareas
     effect(() => {
       const tareas = this.tareasForm();
-      if (tareas.length > 0) {
-        localStorage.setItem('tareas', JSON.stringify(tareas));
-      }
+      localStorage.setItem('tareas', JSON.stringify(tareas));
     });
   }
   
