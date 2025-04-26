@@ -12,7 +12,7 @@ import { MarkdownModule } from 'ngx-markdown';
 })
 export class AiSuggestionsComponent   {
   isVisible = signal(false);
-  loading = false
+  isLoading = signal(false);
   suggestion = signal('');
   aiService = inject(AiService);
   taskService = inject(TareasService);
@@ -21,23 +21,24 @@ export class AiSuggestionsComponent   {
   constructor(){
     this.aiSuggestion()
   }
+  
  aiSuggestion(){
-  const storage = this.taskService.tareasForm()
-  this.tasks.update(()=> storage.map((task) => task.title ))
-   const tareas = this.tasks().join()
+  const storage = this.taskService.tareasForm();
+  this.tasks.update(()=> storage.map((task) => task.title ));
+   const tareas = this.tasks().join();
+   this.isLoading.set(true);
   if(storage.length > 0){
     this.aiService.aiAssistance({prompt: tareas})
     .subscribe({
       next: (response)=>{
+        this.isLoading.set(false)
         this.suggestion.update(()=>response.content[0].text)
-        console.log(this.suggestion())
+        
       }
     }
-    )
-   
-    
+    )  
   }
-  //this.aiService.aiAssistance()
+  
  } 
  togleModal(){
     this.isVisible.update(()=> !this.isVisible())
