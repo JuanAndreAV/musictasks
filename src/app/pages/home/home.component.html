@@ -55,34 +55,52 @@
           @for (tarea of renderizado(); track tarea.id ) {
             @if (isNotesVisible) {
               <!-- Modal compacto -->
-              <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-3">
-                <div class="bg-white rounded-lg shadow-lg w-full max-w-xs max-h-[90vh] overflow-hidden border border-gray-200">
-                  <div class="p-4">
-                    <div class="flex justify-between items-start mb-3">
-                      <div class="max-w-[80%]">
-                        <h3 class="text-sm font-bold text-gray-800 truncate">{{ title?.toUpperCase() }}</h3>
-                        <p class="text-xs text-gray-600 mt-1">Categoría: {{category}}</p>
-                      </div>
-                      <button (click)="closeForm(false)" class="text-gray-400 hover:text-gray-600 transition-colors">
-                        <span class="material-symbols-outlined text-lg">close</span>
-                      </button>
+              <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
+                <div class="bg-white rounded-xl shadow-xl w-full max-w-md max-h-[90vh] flex flex-col overflow-hidden border border-gray-200">
+                  <!-- Encabezado del modal -->
+                  <div class="flex justify-between items-start p-5 border-b border-gray-200">
+                    <div>
+                      <h3 class="text-lg font-semibold text-gray-900">{{ title?.toUpperCase() }}</h3>
+                      <p class="text-sm text-gray-500 mt-1">Categoría: {{category}}</p>
                     </div>
-                    
-                    <div class="bg-gray-50 p-3 rounded mb-3 max-h-[50vh] overflow-y-auto text-xs">
-                      <p class="text-gray-700 whitespace-pre-line">{{ notas?.toLocaleUpperCase() }}</p>
+                    <button 
+                      (click)="closeForm(false)" 
+                      class="text-gray-400 hover:text-gray-600 transition-colors p-1 rounded-full hover:bg-gray-100"
+                      aria-label="Cerrar modal"
+                    >
+                      <span class="material-symbols-outlined text-xl">close</span>
+                    </button>
+                  </div>
+                  
+                  <!-- Contenido de notas con scroll vertical mejorado -->
+                  <div class="flex-1 overflow-y-auto p-5">
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                      <p class="text-gray-700 whitespace-pre-line break-words overflow-y-auto max-h-[50vh]">
+                        {{ notas?.toLocaleUpperCase() }}
+                      </p>
                     </div>
-                    
-                    @if (enlace) {
-                      <a [href]="tarea.enlace" target="_blank" 
-                         class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors text-xs">
-                        <span class="material-symbols-outlined text-sm mr-1">link</span>
-                        Abrir Enlace
-                      </a>
-                    }
-                    
-                    <div class="mt-4 flex justify-end">
-                      <button (click)="closeForm(false)"
-                              class="px-2 py-1 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition-colors text-xs">
+                  </div>
+                  
+                  <!-- Footer del modal -->
+                  <div class="p-5 border-t border-gray-200 bg-gray-50">
+                    <div class="flex justify-between items-center">
+                      @if (enlace) {
+                        <a 
+                          [href]="tarea.enlace" 
+                          target="_blank" 
+                          class="inline-flex items-center text-indigo-600 hover:text-indigo-800 transition-colors text-sm font-medium"
+                        >
+                          <span class="material-symbols-outlined text-base mr-2">link</span>
+                          Abrir Enlace
+                        </a>
+                      } @else {
+                        <div></div> <!-- Espaciador cuando no hay enlace -->
+                      }
+                      
+                      <button 
+                        (click)="closeForm(false)"
+                        class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm font-medium shadow-sm"
+                      >
                         Cerrar
                       </button>
                     </div>

@@ -20,7 +20,7 @@ export class AiSuggestionsComponent   {
   tasks = signal<any>([])
 
   constructor(){
-    this.aiSuggestion()
+    //this.aiSuggestion()
   }
   
  aiSuggestion(){
