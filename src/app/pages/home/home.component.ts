@@ -33,12 +33,34 @@ drop(event:  CdkDragDrop<Tareas[]>): void {
   // Luego llamar al método para registrar o guardar el nuevo orden
   //this.tareaService.registro(this.tareaService.tareasForm());
 }
-isFormVisible = false;
-isNotesVisible = false;
+
 
 
 // Método que se ejecuta al hacer clic en el botón
+// home.component.ts
+isFormVisible = false;
+isNotesVisible = false;
 
+openTaskForm() {
+  this.isFormVisible = true;
+  this.isNotesVisible = false;
+}
+
+verNotas(id: any) {
+  const tarea = this.tareaService.tareasForm().find(t => t.id === id);
+  if (tarea) {
+    this.title = tarea.title;
+    this.category = tarea.category;
+    this.notas = tarea.notas || 'No hay notas registradas';
+    this.enlace = tarea.enlace;
+    this.isNotesVisible = true;
+    this.isFormVisible = false;
+  }
+}
+
+closeNotes() {
+  this.isNotesVisible = false;
+}
 // Mostrar el formulario (modal)
 openForm(vista: boolean) {
 if(vista){
@@ -59,11 +81,6 @@ closeForm(vista: boolean) {
 }
 
 constructor(aiService: AiService){
-  
-//  aiService.aiAssistance({
-//   prompt: "estudia kreutzer numero 2 de viola"
-//  })
- 
 }
 
 
@@ -88,61 +105,21 @@ renderizado = computed(()=>{
 
 setFilter(filter: string){
   this.filtro.set(filter)
-  console.log( this.filtro())
+  //console.log( this.filtro())
   
 }
-
-
-
-//tareaForm = new FormControl('',[Validators.required, Validators.minLength(4)]);
-
-
-// agregarTarea(){
-//   if(this.tareaForm.valid){
-//     const tareas = {
-//       id: Date.now(),
-//       title: this.tareaForm.value?.trim(),
-//       estado: false
-     
-//     }
-//     this.tareas.update((tarea)=>[...tarea, tareas]) 
-    
-//    this.tareaForm.reset()
-//   }
-// }
 
 borrarTarea(id: any){
 this.tareaService.delete(id)
-}
+};
 
-verNotas(id: any){
-  const buscarNotas = this.tareaService.tareasForm().find((tarea)=> tarea.title  === id);
-  const notas = buscarNotas?.notas
-  const title = buscarNotas?.title
-  const categoria = buscarNotas?.category
-  const enlace = buscarNotas?.enlace
- this.notas = notas;
- this.title = title;
- this.category = categoria;
- this.enlace = enlace;
-}
-
-
-// ngOnInit(): void {
-//   const storage = localStorage.getItem('tareas');
-//     if (storage){
-//       const tasks = JSON.parse(storage);
-//       this.tareaService.tareasForm.set(tasks)
-//     }
-    
-// }
-
-
-
+editTask(tarea: any){
+  this.tareaService.selectedTask(tarea)
+  this.openForm(true);
+};
 onCheck(index: any){
+  
   this.tareaService.onCheck(index)
   
-}
-
-
+};
 }

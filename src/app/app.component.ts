@@ -17,9 +17,9 @@ export class AppComponent implements OnInit {
   title = 'tareas';
   apiWakeUpService = inject(AiService);
   ngOnInit(): void {
-    this.apiWakeUpService.wakeUpApi().subscribe({
-      next: () => console.log('API despertada exitosamente (si estaba inactiva).'),
-      error: (error) => console.error('Error al intentar despertar la API:', error),
-    });
+    // this.apiWakeUpService.wakeUpApi().subscribe({
+    //   next: () => console.log('API despertada exitosamente (si estaba inactiva).'),
+    //   error: (error) => console.error('Error al intentar despertar la API:', error),
+    // });
   }
 }
