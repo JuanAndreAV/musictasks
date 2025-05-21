@@ -9,7 +9,7 @@ import { tap } from 'rxjs/operators'
 export class AiService  {
   private http = inject(HttpClient);
   aiResponse = signal('');
-  private aiUrl = environment.apiUrl; 
+  private aiUrl = environment.apiUrlrender; 
 
   constructor() { }
   aiAssistance(prompt: any){
