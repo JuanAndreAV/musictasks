@@ -1,44 +1,96 @@
-<footer class="bg-gradient-to-b from-sky-800 to-sky-900 text-white py-8 w-full border-t border-sky-700">
-  <div class="container mx-auto px-4">
-    <!-- Logo y nombre -->
-    <div class="flex flex-col items-center mb-6">
-      <div class="flex items-center justify-center space-x-2 mb-3">
-        <span class="material-symbols-outlined text-3xl text-yellow-400">music_note</span>
-        <span class="text-2xl font-bold">MusTask</span>
+<footer class="bg-gradient-to-b from-gray-900 via-indigo-950 to-purple-950 text-white py-12 w-full border-t border-purple-800/30 relative overflow-hidden">
+  
+  <!-- Efectos decorativos de fondo -->
+  <div class="absolute inset-0 overflow-hidden opacity-10">
+    <div class="absolute top-1/4 left-1/4 w-32 h-32 bg-purple-400 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-40 h-40 bg-indigo-400 rounded-full blur-3xl"></div>
+  </div>
+
+  <div class="container mx-auto px-4 relative z-10">
+    
+    <!-- Logo y descripción -->
+    <div class="flex flex-col items-center mb-10">
+      <div class="flex items-center justify-center gap-3 mb-4 group">
+        <div class="w-14 h-14 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+          <span class="material-symbols-outlined text-3xl text-white">music_note</span>
+        </div>
+        <span class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent">
+          MusTasks
+        </span>
       </div>
-      <p class="text-sky-200 text-center max-w-md">Organiza y planifica tus tareas musicales de manera profesional</p>
+      <p class="text-purple-200 text-center max-w-md text-sm leading-relaxed">
+        Organiza y planifica tus tareas musicales de manera profesional con inteligencia artificial
+      </p>
     </div>
 
-    <!-- Enlaces -->
-    <div class="flex flex-wrap justify-center gap-6 md:gap-8 my-6">
-      <a href="https://maderarco-2d75f.web.app/tienda" target="_blank" 
-         class="flex items-center hover:text-yellow-400 transition-colors duration-300 group">
-        <span class="material-symbols-outlined mr-1 text-sm group-hover:animate-bounce">festival</span>
-        Maderarco/Tienda
+    <!-- Enlaces principales -->
+    <div class="flex flex-wrap justify-center gap-4 md:gap-6 mb-10">
+      <a 
+        href="https://maderarco-2d75f.web.app/tienda" 
+        target="_blank" 
+        class="group flex items-center gap-2 px-5 py-2.5 bg-white/5 hover:bg-white/10 backdrop-blur-sm rounded-xl border border-white/10 hover:border-purple-400/50 transition-all duration-300">
+        <span class="material-symbols-outlined text-xl text-purple-400 group-hover:scale-110 transition-transform">
+          storefront
+        </span>
+        <span class="text-sm font-medium">Maderarco/Tienda</span>
       </a>
       
-      <a [routerLink]="['/recomendados']" 
-         class="flex items-center hover:text-yellow-400 transition-colors duration-300 group">
-        <span class="material-symbols-outlined mr-1 text-sm group-hover:animate-bounce">recommend</span>
-        Recomendados
+      <a 
+        [routerLink]="['/recomendados']" 
+        class="group flex items-center gap-2 px-5 py-2.5 bg-white/5 hover:bg-white/10 backdrop-blur-sm rounded-xl border border-white/10 hover:border-indigo-400/50 transition-all duration-300">
+        <span class="material-symbols-outlined text-xl text-indigo-400 group-hover:scale-110 transition-transform">
+          recommend
+        </span>
+        <span class="text-sm font-medium">Recomendados</span>
       </a>
     </div>
 
     <!-- Redes sociales -->
-    <div class="flex justify-center space-x-5 my-6">
-      <a href="https://www.linkedin.com/in/juan-a-a-v/" target="_blank" class="text-white hover:text-yellow-400 transition-colors duration-300">
-        <span class="material-symbols-outlined">person</span>
+    <div class="flex justify-center items-center gap-4 mb-10">
+      <p class="text-purple-300 text-sm mr-2">Sígueme:</p>
+      <a 
+        href="https://www.linkedin.com/in/juan-a-a-v/" 
+        target="_blank" 
+        class="w-11 h-11 flex items-center justify-center bg-white/5 hover:bg-gradient-to-br hover:from-purple-600 hover:to-indigo-600 backdrop-blur-sm rounded-xl border border-white/10 hover:border-transparent transition-all duration-300 hover:scale-110 hover:shadow-lg group">
+        <span class="material-symbols-outlined text-xl group-hover:text-white">person</span>
       </a>
-      <a href="#" class="text-white hover:text-yellow-400 transition-colors duration-300">
-        <span class="material-symbols-outlined">mail</span>
+      <a 
+        href="#" 
+        class="w-11 h-11 flex items-center justify-center bg-white/5 hover:bg-gradient-to-br hover:from-purple-600 hover:to-indigo-600 backdrop-blur-sm rounded-xl border border-white/10 hover:border-transparent transition-all duration-300 hover:scale-110 hover:shadow-lg group">
+        <span class="material-symbols-outlined text-xl group-hover:text-white">mail</span>
       </a>
-      
+    </div>
+
+    <!-- Línea decorativa -->
+    <div class="flex items-center justify-center gap-2 mb-8">
+      <div class="w-12 h-px bg-gradient-to-r from-transparent to-purple-500"></div>
+      <div class="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
+      <div class="w-24 h-px bg-gradient-to-r from-purple-500 via-indigo-500 to-purple-500"></div>
+      <div class="w-2 h-2 bg-indigo-500 rounded-full animate-pulse" style="animation-delay: 0.5s"></div>
+      <div class="w-12 h-px bg-gradient-to-l from-transparent to-indigo-500"></div>
     </div>
 
     <!-- Copyright -->
-    <div class="text-center text-sm text-sky-300 mt-6 pt-6 border-t border-sky-700">
-      <p>&copy; 2025 MusTask. Todos los derechos reservados</p>
-      <p class="mt-1">Desarrollado por <a href="https://www.linkedin.com/in/juan-a-a-v/" target="_blank" class="hover:text-yellow-400 underline">JuanitoCode</a></p>
+    <div class="text-center text-sm text-purple-300/80 pt-6 border-t border-white/5">
+      <p class="mb-2 flex items-center justify-center gap-2">
+        <span class="material-symbols-outlined text-base">copyright</span>
+        2025 MusTasks. Todos los derechos reservados
+      </p>
+      <p class="flex items-center justify-center gap-2">
+        Desarrollado con 
+        <span class="text-red-400 animate-pulse">♥</span> 
+        por 
+        <a 
+          href="https://www.linkedin.com/in/juan-a-a-v/" 
+          target="_blank" 
+          class="font-semibold text-purple-400 hover:text-purple-300 underline decoration-purple-400/50 hover:decoration-purple-300 transition-colors">
+          JuanitoCode
+        </a>
+      </p>
     </div>
   </div>
+
+  <!-- Onda decorativa superior -->
+  <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500/50 to-transparent"></div>
+  
 </footer>

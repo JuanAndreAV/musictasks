@@ -1,4 +1,5 @@
 export const environment = {
     production: false, 
-    apiUrl: 'http://localhost:3000/gpt'
+    apiUrlLocal: 'http://localhost:3000/gpt',
+    apiUrl: "https://music-nest-gpt.",
 };

@@ -1,51 +1,151 @@
     
-<div class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 transition-opacity duration-300" (click)="closeForm(false)">
-  <div class="bg-white p-6 rounded-xl shadow-lg relative w-full max-w-md transition-transform duration-300 transform scale-100" (click)="$event.stopPropagation()">
-    <h2 class="text-2xl font-semibold text-gray-800 mb-6">Agregar Tarea</h2>
-   
-
-    <form [formGroup]="form()" class="space-y-4">
-      <div>
-        <p class="text-center text-emerald-500 text-sm">{{ succes }}</p>
-        <label for="tarea" class="block text-sm font-medium text-gray-700">Tarea (Obligatorio)</label>
-        <input formControlName="tarea" type="text" id="tarea" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="Ej: escalas" required />
-        <p class="text-center text-blue-600 text-sm mt-1">{{ mensaje }}</p>
-      </div>
-
-      <div>
-        <label for="categoria" class="block text-sm font-medium text-gray-700">Categoría:</label>
-        <div class="relative">
-          <select formControlName="categoria"  id="categoria" class="mt-1 block w-full pl-3 pr-10 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-            <option>Técnica</option>
-            <option>Repertorio</option>
-            <option>Composición</option>
-            <option>Ensayo</option>
-            <option>Otro</option>
-          </select>
-          <div class="absolute inset-y-0 right-0 flex items-center pointer-events-none">
-            <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-            </svg>
+<div class="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center items-center z-50 p-4" (click)="closeForm(false)">
+  <div class="bg-white rounded-3xl shadow-2xl relative w-full max-w-lg transform transition-all duration-300 overflow-hidden" (click)="$event.stopPropagation()">
+    
+    <!-- Header del formulario -->
+    <div class="bg-gradient-to-r from-purple-600 to-indigo-600 p-6 text-white relative overflow-hidden">
+      <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
+      <div class="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full -ml-12 -mb-12"></div>
+      
+      <div class="relative flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
+            <span class="material-symbols-outlined text-2xl">music_note</span>
+          </div>
+          <div>
+            <h2 class="text-2xl font-bold">Nueva Tarea Musical</h2>
+            <p class="text-purple-100 text-sm">Organiza tu práctica</p>
           </div>
         </div>
-      </div>
-
-      <div>
-        <label for="message" class="block text-sm font-medium text-gray-700">Notas (Opcional)</label>
-        <textarea formControlName="notas" id="message" rows="3" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="Comentarios..."></textarea>
-      </div>
-
-      <div>
-        <label for="link" class="block text-sm font-medium text-gray-700">Enlace (Opcional)</label>
-        <input id="link" formControlName="enlace" type="url" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="https://ejemplo.com">
-      </div>
-
-      <div class="flex justify-end">
-        <button type="button" (click)="enviarData()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-          Registrar tarea
+        
+        <button 
+          type="button"
+          (click)="closeForm(false)" 
+          class="text-white/80 hover:text-white hover:bg-white/20 transition-all p-2 rounded-full"
+          aria-label="Cerrar formulario">
+          <span class="material-symbols-outlined text-2xl">close</span>
         </button>
       </div>
-    </form>
+    </div>
+
+    <!-- Contenido del formulario -->
+    <div class="p-6 max-h-[calc(100vh-200px)] overflow-y-auto">
+      <form [formGroup]="form()" class="space-y-5">
+        
+        <!-- Mensaje de éxito -->
+        @if (succes) {
+          <div class="bg-green-50 border border-green-200 rounded-xl p-4 flex items-center gap-3">
+            <span class="material-symbols-outlined text-green-600 text-2xl">check_circle</span>
+            <p class="text-green-700 font-medium">{{ succes }}</p>
+          </div>
+        }
+
+        <!-- Campo Tarea -->
+        <div class="space-y-2">
+          <label for="tarea" class="flex items-center gap-2 text-sm font-semibold text-gray-700">
+            <span class="material-symbols-outlined text-purple-600 text-lg">edit_note</span>
+            Tarea Musical
+            <span class="text-red-500">*</span>
+          </label>
+          <div class="relative">
+            <input 
+              formControlName="tarea" 
+              type="text" 
+              id="tarea" 
+              class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl shadow-sm focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all outline-none placeholder-gray-400" 
+              placeholder="Ej: Práctica de escalas mayores" 
+              required />
+            <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+              <span class="material-symbols-outlined text-gray-300">music_note</span>
+            </div>
+          </div>
+          @if (mensaje) {
+            <div class="flex items-center gap-2 text-blue-600 text-sm">
+              <span class="material-symbols-outlined text-base">info</span>
+              <p>{{ mensaje }}</p>
+            </div>
+          }
+        </div>
+
+        <!-- Campo Categoría -->
+        <div class="space-y-2">
+          <label for="categoria" class="flex items-center gap-2 text-sm font-semibold text-gray-700">
+            <span class="material-symbols-outlined text-purple-600 text-lg">bookmark</span>
+            Categoría
+          </label>
+          <div class="relative">
+            <select 
+              formControlName="categoria" 
+              id="categoria" 
+              class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl shadow-sm focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all outline-none appearance-none bg-white cursor-pointer">
+              <option value="Técnica">🎯 Técnica</option>
+              <option value="Repertorio">🎼 Repertorio</option>
+              <option value="Composición">✍️ Composición</option>
+              <option value="Ensayo">🎭 Ensayo</option>
+              <option value="Otro">📌 Otro</option>
+            </select>
+            <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+              <span class="material-symbols-outlined text-gray-400">expand_more</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Campo Notas -->
+        <div class="space-y-2">
+          <label for="message" class="flex items-center gap-2 text-sm font-semibold text-gray-700">
+            <span class="material-symbols-outlined text-purple-600 text-lg">description</span>
+            Notas
+            <span class="text-gray-400 text-xs font-normal">(Opcional)</span>
+          </label>
+          <textarea 
+            formControlName="notas" 
+            id="message" 
+            rows="4" 
+            class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl shadow-sm focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all outline-none placeholder-gray-400 resize-none" 
+            placeholder="Agrega detalles sobre esta tarea musical..."></textarea>
+        </div>
+
+        <!-- Campo Enlace -->
+        <div class="space-y-2">
+          <label for="link" class="flex items-center gap-2 text-sm font-semibold text-gray-700">
+            <span class="material-symbols-outlined text-purple-600 text-lg">link</span>
+            Enlace de Referencia
+            <span class="text-gray-400 text-xs font-normal">(Opcional)</span>
+          </label>
+          <div class="relative">
+            <input 
+              id="link" 
+              formControlName="enlace" 
+              type="url" 
+              class="w-full px-4 py-3 pl-10 border-2 border-gray-200 rounded-xl shadow-sm focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all outline-none placeholder-gray-400" 
+              placeholder="https://ejemplo.com/partitura">
+            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+              <span class="material-symbols-outlined text-gray-400 text-lg">language</span>
+            </div>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+    <!-- Footer con botones -->
+    <div class="bg-gray-50 px-6 py-4 border-t border-gray-100 flex justify-between items-center gap-3">
+      <button 
+        type="button" 
+        (click)="closeForm(false)"
+        class="px-5 py-2.5 text-gray-700 bg-white border-2 border-gray-300 rounded-xl font-medium hover:bg-gray-50 transition-all focus:outline-none focus:ring-2 focus:ring-gray-300">
+        Cancelar
+      </button>
+      
+      <button 
+        type="button" 
+        (click)="enviarData()" 
+        class="flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2">
+        <span class="material-symbols-outlined text-xl">add_task</span>
+        Registrar Tarea
+      </button>
+    </div>
+
   </div>
 </div>
 

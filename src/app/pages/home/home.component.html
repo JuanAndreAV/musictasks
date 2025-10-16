@@ -1,82 +1,120 @@
-<body class="bg-gray-50 min-h-screen font-sans">
-  <div class="container mx-auto px-3 py-4">
-    <!-- Filtros en línea compactos -->
-    <section class="flex justify-center mb-4">
-      <div class="inline-flex rounded-lg shadow-sm" role="group">
-        <button type="button" (click)="setFilter('all')" 
-                class="px-3 py-1.5 text-xs sm:text-sm font-medium rounded-l-lg bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:from-cyan-600 hover:to-blue-700 focus:z-10 focus:ring-1 focus:ring-blue-500 transition-all duration-300">
+<body class="bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 min-h-screen font-sans">
+  <div class="container mx-auto px-4 py-6 lg:px-8 lg:py-10">
+    
+    <!-- Header Hero Section -->
+    <header class="mb-8 text-center">
+      <div class="inline-flex items-center justify-center gap-3 mb-4">
+        <div class="w-12 h-12 bg-gradient-to-br from-purple-600 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg">
+          <span class="material-symbols-outlined text-white text-3xl">music_note</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 bg-clip-text text-transparent">
+          MusicTasks
+        </h1>
+      </div>
+      <p class="text-gray-600 text-sm md:text-base max-w-2xl mx-auto">
+        Organiza tu práctica musical con inteligencia artificial
+      </p>
+    </header>
+
+    <!-- Filtros modernos con tabs -->
+    <section class="mb-6 flex justify-center">
+      <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-2 inline-flex w-full max-w-md border border-white/20">
+        <button 
+          type="button" 
+          (click)="setFilter('all')" 
+          class="flex-1 px-4 py-3 text-sm font-semibold rounded-xl transition-all duration-300 bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:from-cyan-600 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-purple-500">
+          <span class="material-symbols-outlined text-lg align-middle mr-1">today</span>
           Hoy
         </button>
-        <button type="button" (click)="setFilter('pending')" 
-                class="px-3 py-1.5 text-xs sm:text-sm font-medium bg-gradient-to-r from-blue-600 to-blue-600 text-white hover:from-blue-700 hover:to-blue-700 focus:z-10 focus:ring-1 focus:ring-blue-500 transition-all duration-300">
+        <button 
+          type="button" 
+          (click)="setFilter('pending')" 
+          class="flex-1 px-4 py-3 text-sm font-semibold rounded-xl transition-all duration-300 bg-gradient-to-r from-blue-600 to-blue-600 text-white hover:from-blue-700 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-purple-500">
+          <span class="material-symbols-outlined text-lg align-middle mr-1">pending_actions</span>
           Pendiente
         </button>
-        <button type="button" (click)="setFilter('completed')" 
-                class="px-3 py-1.5 text-xs sm:text-sm font-medium rounded-r-lg bg-gradient-to-r from-blue-600 to-cyan-500 text-white hover:from-blue-700 hover:to-cyan-600 focus:z-10 focus:ring-1 focus:ring-blue-500 transition-all duration-300">
+        <button 
+          type="button" 
+          (click)="setFilter('completed')" 
+          class="flex-1 px-4 py-3 text-sm font-semibold rounded-xl transition-all duration-300 bg-gradient-to-r from-blue-600 to-cyan-500 text-white hover:from-blue-700 hover:to-cyan-600 focus:outline-none focus:ring-2 focus:ring-purple-500">
+          <span class="material-symbols-outlined text-lg align-middle mr-1">task_alt</span>
           Realizado
         </button>  
       </div>
     </section>
-    
-    <!-- Acciones en línea compactas -->
-    <section class="flex flex-wrap justify-center sm:justify-between items-center gap-2 mb-5">
-      <a [routerLink]="['/categorias']" 
-         class="flex items-center gap-1 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-3 py-1.5 rounded-lg hover:from-indigo-700 hover:to-purple-700 shadow-md transition-all duration-300 text-xs sm:text-sm whitespace-nowrap">
-        <span class="material-symbols-outlined text-sm">bookmark</span>
-        <span>Categorías</span>
+
+    <!-- Botones de acción modernos -->
+    <section class="flex flex-wrap justify-center sm:justify-between items-center gap-3 mb-8">
+      <a 
+        [routerLink]="['/categorias']" 
+        class="group flex items-center gap-2 bg-white hover:bg-gradient-to-r hover:from-indigo-600 hover:to-purple-600 text-gray-700 hover:text-white px-5 py-3 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-200 hover:border-transparent transform hover:-translate-y-1 text-sm">
+        <span class="material-symbols-outlined text-xl group-hover:scale-110 transition-transform">bookmark</span>
+        <span class="font-medium">Categorías</span>
       </a>
       
-      <button (click)="openTaskForm()" 
-              class="flex items-center gap-1 bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-3 py-1.5 rounded-lg hover:from-emerald-600 hover:to-teal-700 shadow-md transition-all duration-300 text-xs sm:text-sm whitespace-nowrap">
-        <span class="material-symbols-outlined text-sm">music_note</span>
-        <span>Agregar tarea</span>
+      <button 
+        (click)="openTaskForm()" 
+        class="group flex items-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white px-5 py-3 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 text-sm">
+        <span class="material-symbols-outlined text-xl group-hover:rotate-180 transition-transform duration-500">add_circle</span>
+        <span class="font-medium">Agregar tarea</span>
       </button>
     </section>
 
     <!-- Formulario de tareas -->
     @if(isFormVisible){
-      <app-form (formClosed)="isFormVisible = false"></app-form>
+      <div class="mb-8">
+        <app-form (formClosed)="isFormVisible = false"></app-form>
+      </div>
     }
 
-    <!-- Modal de notas (fuera del bucle de tareas) -->
+    <!-- Modal de notas renovado -->
     @if (isNotesVisible) {
-      <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
-        <div class="bg-white rounded-xl shadow-xl w-full max-w-md max-h-[90vh] flex flex-col overflow-hidden border border-gray-200">
+      <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-lg max-h-[90vh] flex flex-col overflow-hidden">
           <!-- Encabezado del modal -->
-          <div class="flex justify-between items-start p-5 border-b border-gray-200">
-            <div>
-              <h3 class="text-lg font-semibold text-gray-900">{{ title?.toUpperCase() }}</h3>
-              <p class="text-sm text-gray-500 mt-1">Categoría: {{category}}</p>
+          <div class="bg-gradient-to-r from-purple-600 to-indigo-600 p-6 text-white">
+            <div class="flex justify-between items-start">
+              <div class="flex-1">
+                <div class="flex items-center gap-2 mb-2">
+                  <span class="material-symbols-outlined">music_note</span>
+                  <h3 class="text-xl font-bold">{{ title?.toUpperCase() }}</h3>
+                </div>
+                <div class="flex items-center gap-2 text-purple-100">
+                  <span class="material-symbols-outlined text-sm">bookmark</span>
+                  <p class="text-sm font-medium">{{ category }}</p>
+                </div>
+              </div>
+              <button 
+                (click)="closeNotes()" 
+                class="text-white/80 hover:text-white hover:bg-white/20 transition-all p-2 rounded-full"
+                aria-label="Cerrar modal">
+                <span class="material-symbols-outlined text-2xl">close</span>
+              </button>
             </div>
-            <button 
-              (click)="closeNotes()" 
-              class="text-gray-400 hover:text-gray-600 transition-colors p-1 rounded-full hover:bg-gray-100"
-              aria-label="Cerrar modal"
-            >
-              <span class="material-symbols-outlined text-xl">close</span>
-            </button>
           </div>
           
           <!-- Contenido de notas -->
-          <div class="flex-1 overflow-y-auto p-5">
-            <div class="bg-gray-50 p-4 rounded-lg">
-              <p class="text-gray-700 whitespace-pre-line break-words overflow-y-auto max-h-[50vh]">
-                {{ notas?.toLocaleUpperCase() }}
-              </p>
+          <div class="flex-1 overflow-y-auto p-6 bg-gray-50">
+            <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
+              <div class="flex items-start gap-3">
+                <span class="material-symbols-outlined text-purple-600 mt-1">description</span>
+                <p class="text-gray-700 leading-relaxed whitespace-pre-line break-words flex-1">
+                  {{ notas?.toLocaleUpperCase() }}
+                </p>
+              </div>
             </div>
           </div>
           
           <!-- Footer del modal -->
-          <div class="p-5 border-t border-gray-200 bg-gray-50">
-            <div class="flex justify-between items-center">
+          <div class="p-6 bg-white border-t border-gray-100">
+            <div class="flex justify-between items-center gap-4">
               @if (enlace) {
                 <a 
                   [href]="enlace" 
                   target="_blank" 
-                  class="inline-flex items-center text-indigo-600 hover:text-indigo-800 transition-colors text-sm font-medium"
-                >
-                  <span class="material-symbols-outlined text-base mr-2">link</span>
-                  Abrir Enlace
+                  class="flex items-center gap-2 text-purple-600 hover:text-purple-800 transition-colors font-medium group">
+                  <span class="material-symbols-outlined text-xl group-hover:translate-x-1 transition-transform">link</span>
+                  <span>Abrir Enlace</span>
                 </a>
               } @else {
                 <div></div>
@@ -84,8 +122,7 @@
               
               <button 
                 (click)="closeNotes()"
-                class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm font-medium shadow-sm"
-              >
+                class="px-6 py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white rounded-xl font-medium shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5">
                 Cerrar
               </button>
             </div>
@@ -94,65 +131,164 @@
       </div>
     }
 
-    <!-- Tabla de tareas -->
-    <div class="bg-white rounded-lg shadow-sm overflow-x-auto border border-gray-200">
-      <table cdkDropListGroup class="min-w-full divide-y divide-gray-200 text-xs sm:text-sm">
-        <thead class="bg-gradient-to-r from-sky-600 to-blue-700">
-          <tr>
-            <th class="px-2 py-2 text-left font-medium text-white uppercase tracking-wider">✓</th>
-            <th class="px-2 py-2 text-left font-medium text-white uppercase tracking-wider">Tarea</th>
-            <th class="px-2 py-2 text-left font-medium text-white uppercase tracking-wider">Estado</th>
-            <th class="px-2 py-2 text-left font-medium text-white uppercase tracking-wider">Notas</th>
-            <th class="px-2 py-2 text-left font-medium text-white uppercase tracking-wider">✕</th>
-          </tr>
-        </thead>
-        
-        <tbody cdkDropList (cdkDropListDropped)="drop($event)" class="bg-white divide-y divide-gray-200">
-          @for (tarea of renderizado(); track tarea.id) {
-            <tr cdkDrag [ngClass]="{'bg-gray-100': tarea.estado, 'hover:bg-blue-50': !tarea.estado}" class="transition-colors">
-              <td class="px-2 py-2 whitespace-nowrap">
-                <input type="checkbox" name="selectedTask" 
-                       class="h-3 w-3 sm:h-4 sm:w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
-                       [(ngModel)]="tarea.estado" 
-                       (change)="onCheck(tarea)">
-              </td>
-              
-              <td class="px-2 py-2 max-w-[100px] sm:max-w-xs break-words">
-                <span [ngClass]="{'line-through text-gray-500': tarea.estado}">{{ tarea?.title }}</span>
-              </td>
-              
-              <td class="px-2 py-2 whitespace-nowrap">
-                @if(tarea.estado) {
-                  <span class="material-symbols-outlined text-green-600 text-sm">task_alt</span>
-                } @else {
-                  <span class="material-symbols-outlined text-yellow-600 text-sm">pending_actions</span>
-                }
-              </td>
-              
-              <td class="px-2 py-2 whitespace-nowrap">
-                <button (click)="verNotas(tarea.id)" 
-                        class="text-gray-500 hover:text-blue-600 transition-colors">
-                  <span class="material-symbols-outlined text-sm">description</span>
-                </button>
-              </td>
-              
-              <td class="px-2 py-2 whitespace-nowrap">
-                @if (tarea.estado) {
-                  <button (click)="borrarTarea(tarea.id)" 
-                          class="text-gray-500 hover:text-red-600 transition-colors">
-                    <span class="material-symbols-outlined text-sm">delete</span>
-                  </button>
-                } @else {
-                  <button (click)="editTask(tarea)" 
-                          class="text-gray-500 hover:text-blue-600 transition-colors">
-                    <span class="material-symbols-outlined text-sm">edit</span>
-                  </button>
-                }
-              </td>
+    <!-- Tabla de tareas renovada -->
+    <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden border border-white/20">
+      
+      <!-- Vista Desktop/Tablet -->
+      <div class="hidden md:block overflow-x-auto">
+        <table cdkDropListGroup class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600">
+            <tr>
+              <th class="px-6 py-4 text-left text-xs font-bold text-white uppercase tracking-wider">Estado</th>
+              <th class="px-6 py-4 text-left text-xs font-bold text-white uppercase tracking-wider">Tarea Musical</th>
+              <th class="px-6 py-4 text-left text-xs font-bold text-white uppercase tracking-wider">Progreso</th>
+              <th class="px-6 py-4 text-left text-xs font-bold text-white uppercase tracking-wider">Detalles</th>
+              <th class="px-6 py-4 text-left text-xs font-bold text-white uppercase tracking-wider">Acciones</th>
             </tr>
-          }
-        </tbody>
-      </table>
+          </thead>
+          
+          <tbody cdkDropList (cdkDropListDropped)="drop($event)" class="divide-y divide-gray-200">
+            @for (tarea of renderizado(); track tarea.id) {
+              <tr 
+                cdkDrag 
+                [ngClass]="{'bg-green-50/50': tarea.estado, 'hover:bg-purple-50/50': !tarea.estado}" 
+                class="transition-all duration-300 cursor-move group">
+                
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="flex items-center">
+                    <input 
+                      type="checkbox" 
+                      name="selectedTask"
+                      [(ngModel)]="tarea.estado" 
+                      (change)="onCheck(tarea)"
+                      class="h-5 w-5 text-purple-600 rounded-lg border-gray-300 focus:ring-purple-500 focus:ring-2 cursor-pointer transition-all">
+                  </div>
+                </td>
+                
+                <td class="px-6 py-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-purple-100 to-indigo-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <span class="material-symbols-outlined text-purple-600">music_note</span>
+                    </div>
+                    <div class="max-w-xs break-words">
+                      <p [ngClass]="{'line-through text-gray-400': tarea.estado, 'text-gray-900 font-medium': !tarea.estado}">
+                        {{ tarea?.title }}
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                
+                <td class="px-6 py-4 whitespace-nowrap">
+                  @if(tarea.estado) {
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-green-100 text-green-700">
+                      <span class="material-symbols-outlined text-sm">task_alt</span>
+                      Completada
+                    </span>
+                  } @else {
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-700">
+                      <span class="material-symbols-outlined text-sm">pending_actions</span>
+                      Pendiente
+                    </span>
+                  }
+                </td>
+                
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <button 
+                    (click)="verNotas(tarea.id)" 
+                    class="inline-flex items-center gap-1.5 px-3 py-2 text-purple-600 hover:text-purple-800 hover:bg-purple-50 rounded-lg transition-all">
+                    <span class="material-symbols-outlined text-xl">description</span>
+                    <span class="text-sm font-medium">Ver</span>
+                  </button>
+                </td>
+                
+                <td class="px-6 py-4 whitespace-nowrap">
+                  @if (tarea.estado) {
+                    <button 
+                      (click)="borrarTarea(tarea.id)" 
+                      class="inline-flex items-center gap-1.5 px-3 py-2 text-red-600 hover:text-red-800 hover:bg-red-50 rounded-lg transition-all">
+                      <span class="material-symbols-outlined text-xl">delete</span>
+                      <span class="text-sm font-medium">Eliminar</span>
+                    </button>
+                  } @else {
+                    <button 
+                      (click)="editTask(tarea)" 
+                      class="inline-flex items-center gap-1.5 px-3 py-2 text-indigo-600 hover:text-indigo-800 hover:bg-indigo-50 rounded-lg transition-all">
+                      <span class="material-symbols-outlined text-xl">edit</span>
+                      <span class="text-sm font-medium">Editar</span>
+                    </button>
+                  }
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Vista Mobile - Cards -->
+      <div class="md:hidden divide-y divide-gray-200">
+        @for (tarea of renderizado(); track tarea.id) {
+          <div 
+            cdkDrag
+            [ngClass]="{'bg-green-50/50': tarea.estado, 'bg-white': !tarea.estado}" 
+            class="p-4 transition-all duration-300">
+            
+            <div class="flex items-start gap-3 mb-3">
+              <input 
+                type="checkbox" 
+                name="selectedTask"
+                [(ngModel)]="tarea.estado" 
+                (change)="onCheck(tarea)"
+                class="mt-1 h-5 w-5 text-purple-600 rounded-lg border-gray-300 focus:ring-purple-500">
+              
+              <div class="flex-1">
+                <h3 class="break-words" [ngClass]="{'line-through text-gray-400': tarea.estado, 'text-gray-900 font-semibold': !tarea.estado}">
+                  {{ tarea?.title }}
+                </h3>
+                
+                <div class="mt-2">
+                  @if(tarea.estado) {
+                    <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700">
+                      <span class="material-symbols-outlined text-sm">task_alt</span>
+                      Completada
+                    </span>
+                  } @else {
+                    <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-700">
+                      <span class="material-symbols-outlined text-sm">pending_actions</span>
+                      Pendiente
+                    </span>
+                  }
+                </div>
+              </div>
+            </div>
+
+            <div class="flex gap-2 mt-3">
+              <button 
+                (click)="verNotas(tarea.id)" 
+                class="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 text-purple-600 bg-purple-50 hover:bg-purple-100 rounded-lg transition-all text-sm font-medium">
+                <span class="material-symbols-outlined text-lg">description</span>
+                Ver Notas
+              </button>
+              
+              @if (tarea.estado) {
+                <button 
+                  (click)="borrarTarea(tarea.id)" 
+                  class="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 text-red-600 bg-red-50 hover:bg-red-100 rounded-lg transition-all text-sm font-medium">
+                  <span class="material-symbols-outlined text-lg">delete</span>
+                  Eliminar
+                </button>
+              } @else {
+                <button 
+                  (click)="editTask(tarea)" 
+                  class="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 text-indigo-600 bg-indigo-50 hover:bg-indigo-100 rounded-lg transition-all text-sm font-medium">
+                  <span class="material-symbols-outlined text-lg">edit</span>
+                  Editar
+                </button>
+              }
+            </div>
+          </div>
+        }
+      </div>
     </div>
+
   </div>
 </body>
